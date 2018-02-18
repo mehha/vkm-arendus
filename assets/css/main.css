@@ -8685,9 +8685,6 @@ footer {
     position: relative;
     top: -130px; }
   footer > .container {
-    min-height: 100px; }
-    footer > .container > p {
-      padding-bottom: 0;
-      margin-bottom: 0; } }
+    min-height: 100px; } }
 
 /*# sourceMappingURL=main.css.map */
