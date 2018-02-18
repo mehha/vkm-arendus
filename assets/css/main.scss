@@ -1,0 +1,121 @@
+//====================================
+// Global Imports
+//====================================
+
+
+// 1- Import bootstrap framework
+@import '1-frameworks/index';
+
+// 2 - Import plugins
+@import '2-plugins/index';
+
+// 3 - Import base style, custom variables and mixins
+@import '3-base/index';
+
+// 4 - Import modules
+@import '4-modules/index';
+
+// 5 - Import layout  styles
+@import '5-layout/index';
+
+
+//CUSTOM MADIS
+
+//NAV
+
+nav .container > p {
+  color: $blue;
+}
+
+//BODY
+
+a:hover { text-decoration: none; }
+
+.bg-gray { background-color: $gray-100; }
+
+.row-grid {
+  //padding-bottom: 40px;
+  &:last-of-type { padding-bottom: 0; }
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #212529;
+  opacity: 1; }
+.form-control:-ms-input-placeholder {
+  color: #212529;
+  opacity: 1; }
+.form-control::placeholder {
+  color: #212529;
+  opacity: 1; }
+
+.background {
+  background-repeat: no-repeat;
+}
+
+.background-bottles {
+  @extend .background;
+  min-height: 500px;
+  //-webkit-background-size: auto 500px;
+  //-moz-background-size: auto 500px;
+  //-o-background-size: auto 500px;
+  background-size: auto 450px;
+  background-position: bottom center;
+}
+
+.background-woman {
+  @extend .background;
+  min-height: 300px;
+  -webkit-background-size: auto 300px;
+  -moz-background-size: auto 300px;
+  -o-background-size: auto 300px;
+  background-size: auto 300px;
+  background-position: bottom left;
+}
+
+.water-bottle { background-image: url("../img/water-bottle.png"); }
+.plastic-bottle { background-image: url("../img/plastic-bottle.png"); }
+.double-bottle { background-image: url("../img/double-bottle.png"); background-position: bottom center; }
+.woman { background-image: url("../img/woman.png"); }
+
+.water-bottle { padding-bottom: 60px;
+}
+.plastic-bottle { padding-bottom: 60px;
+}
+.double-bottle {
+}
+
+//FOOTER
+
+footer {
+  background-color: $blue;
+  color: $gray-400;
+  p:last-of-type { margin-bottom: 0; }
+  a { color: $gray-400;
+    &:focus { color: $gray-500; }
+    &:active { color: $gray-500; }
+    &:visited { color: $gray-500; }
+    &:hover { color: $gray-500; }
+  }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767px) {
+  .woman { margin-bottom: 0; }
+  .quality > p { padding-right: 20px; }
+}
+
+@media (min-width: 768px) {
+  .background-bottles {
+    background-position: bottom center;
+  }
+  .double-bottle p { max-width: 30%; }
+  .water-bottle {
+    position: relative;
+    top: -130px;
+  }
+  footer {
+    & > .container { min-height: 100px;
+      & > p { padding-bottom: 0; margin-bottom: 0; }
+    }
+  }
+}
