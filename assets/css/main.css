@@ -8622,11 +8622,11 @@ a:hover {
   color: #212529;
   opacity: 1; }
 
-.background, .background-bottles, .background-woman {
+.background, .background-bottles, .background-woman, .oil-bottle-korgiga {
   background-repeat: no-repeat; }
 
 .background-bottles {
-  min-height: 500px;
+  min-height: 480px;
   background-size: auto 450px;
   background-position: bottom center; }
 
@@ -8635,24 +8635,26 @@ a:hover {
   background-size: auto 300px;
   background-position: bottom left; }
 
-.water-bottle {
-  background-image: url("../img/water-bottle.png"); }
+.oil-bottle {
+  background-image: url("../img/olipudel-rotated.png"); }
 
-.plastic-bottle {
-  background-image: url("../img/plastic-bottle.png"); }
+.oil-bottle-korgiga {
+  background-image: url("../img/korgid.jpg");
+  background-size: auto 130px;
+  min-height: 189px; }
+
+.keemia-bottle {
+  background-image: url("../img/keemia-rotated-lighter.png"); }
 
 .double-bottle {
-  background-image: url("../img/double-bottle.png");
+  background-image: url("../img/plastic-closure-only.png");
   background-position: bottom center; }
 
 .woman {
   background-image: url("../img/woman.png"); }
 
-.water-bottle {
-  padding-bottom: 60px; }
-
-.plastic-bottle {
-  padding-bottom: 60px; }
+.list-inline-item {
+  display: block; }
 
 footer {
   background-color: #342e82;
@@ -8673,18 +8675,32 @@ footer {
 @media (max-width: 767px) {
   .woman {
     margin-bottom: 0; }
-  .quality > p {
-    padding-right: 20px; } }
+  .double-bottle {
+    background-position: center 25%; } }
 
 @media (min-width: 768px) {
   .background-bottles {
     background-position: bottom center; }
   .double-bottle p {
     max-width: 30%; }
-  .water-bottle {
-    position: relative;
-    top: -130px; }
   footer > .container {
     min-height: 100px; } }
+
+@media (min-width: 992px) {
+  .oil-bottle {
+    position: relative;
+    top: -200px; }
+  .oil-bottle-korgiga-leht {
+    top: -70px; }
+  .h-lg-100 {
+    height: 100% !important; }
+  .pt-lg-10 {
+    padding-top: 11em; }
+  .oil-bottle-korgiga {
+    background-position: 70% 20%; } }
+
+@media (max-width: 991px) {
+  .oil-bottle-korgiga {
+    background-position: center center; } }
 
 /*# sourceMappingURL=main.css.map */
