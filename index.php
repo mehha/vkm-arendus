@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="This is a boilerplate for a Bootstrap 4.0 (beta) project">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114756864-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-114756864-1');
+    </script>
+
+    <meta name="description" content="VKM Trading OÜ">
     <meta name="keywords"
-          content="HTML, CSS, JS, Sass, JavaScript, framework, bootstrap, front-end, frontend, web development">
-    <meta name="author" content="Henrik H. Boelsmand">
-    <title>VKM Arendus</title>
+          content="VKM Trading OÜ">
+    <meta name="author" content="FCR Media">
+    <title>VKM Trading OÜ</title>
     <link rel="shortcut icon" href="favicon.ico">
 
     <!-- build:css -->
@@ -23,12 +34,15 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <div class="row w-100 m-0">
-            <div class="col-12 d-flex justify-content-between p-0">
-            <a class="navbar-brand mb-3" href="/">
-                <img src="assets/img/logo.png" width="200px" height="auto" alt="">
-            </a>
-
-            <a href="/kontakt.html"><p><i class="fa fa-envelope fa-fw"></i>&nbsp; Kontakt</p></a>
+            <div class="col p-0">
+                <a class="navbar-brand mb-3" href="./">
+                    <img src="assets/img/logo.png" width="180px" height="auto" alt="">
+                </a>
+            </div>
+            <div class="col p-0 text-right">
+                <a class="mr-2" href="en.php"><span><img class="img-language position-relative" src="assets/img/en.png" alt=""></span></a>
+                <a class="mr-md-2" href="./"><span><img class="img-language position-relative" src="assets/img/fi.png" alt=""></span></a>
+                <a class="d-block d-md-inline-block" href="yhteistiedote.php"><span class="m-0"><i class="fa fa-envelope fa-fw"></i> Yhteistiedote</span></a>
             </div>
         </div>
     </div>
@@ -48,11 +62,12 @@
                         <p>Tuotanto-osastollamme on 6 erilaista tuotantopistettä, joilla voidaan valmistaa 7 miljoonaa pulloa kuukaudessa.</p>
                         <p>Työmme perustuu EU:n vaatimuksiin tuotantoprosessin laadun ja ympäristönsuojelun osalta, minkä vahvistavat meille myönnetyt: ISO 9001:2015 ja ISO 14001:2015 -sertifikaatit.</p>
                     </div>
+                    <div data-tilt class="col-lg-6 oil-bottle-korgiga"></div>
                 </div>
         </div>
     </div>
     <div class="row row-grid">
-        <div data-tilt class="col-md-6 background-bottles oil-bottle d-flex flex-column justify-content-end align-items-center order-md-2">
+        <div data-tilt class="col-md-6 background-bottles oil-bottle oil-bottle-korgiga-leht d-flex flex-column justify-content-end align-items-center order-md-2">
             <h4 class="bg-white p-4">Öljypullot ja öljypullojen valmistus:</h4>
             <ul class="w-75 mb-5">
                 <li class="list-inline-item pl-3 pt-2">- Valmistamme 0,5 litran öljypulloja halkaisijaltaan 28 mm:n suilla.</li>
@@ -104,22 +119,80 @@
         <div class="row bg-gray row-grid">
             <div class="col-md-6 order-2 order-md-1 background-woman woman"></div>
             <div class="col-md-6 order-1 order-md-2 mb-md-5">
-                <h4 class="text-center text-lg-right mb-4">Konsultatsioonid</h4>
-                <form action="#">
+                <h4 class="text-center text-lg-right mb-4">Konsultoinnit</h4>
+                <form id="contact-form" method="post" action="index.php#contact-form" role="form">
                     <div class="form-group">
-                        <input type="text" class="form-control border-0" id="inputNimi" placeholder="Nimi">
+                        <input type="text" class="form-control border-0" id="inputNimi" name="inputNimi" placeholder="Nimi">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control border-0" id="inputFirma" placeholder="Firmanimi">
+                        <input type="text" class="form-control border-0" id="inputFirma" name="inputFirma" placeholder="Yritys">
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control border-0" id="email" placeholder="E-mail">
+                        <input type="email" class="form-control border-0" id="email" name="email" placeholder="Sähköposti">
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control border-0" id="inputKonsultatsioon" rows="5" placeholder="Konsultatsiooni sisu"></textarea>
+                        <textarea class="form-control border-0" id="inputKonsultatsioon" name="inputKonsultatsioon" rows="5" placeholder="Kuulemisen sisältö"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary float-right">Saada</button>
+                    <button type="submit" name="submit" class="btn btn-primary float-right">Lähetä</button>
                 </form>
+                <p><strong>
+                    <?php
+
+                    use PHPMailer\PHPMailer\PHPMailer;
+                    use PHPMailer\PHPMailer\Exception;
+
+                    if(isset($_POST['submit'])) {
+                        $message =
+                            'Nimi:	' . $_POST['inputNimi'] . '<br />
+Firma:	' . $_POST['inputFirma'] . '<br />
+Email:	' . $_POST['email'] . '<br />
+Konsultatsioon:	' . $_POST['inputKonsultatsioon'] . '
+';
+
+// Import PHPMailer classes into the global namespace
+// These must be at the top of your script, not inside a function
+
+
+//Load composer's autoloader
+                        require 'PHPMailer/src/PHPMailer.php';
+                        require 'PHPMailer/src/SMTP.php';
+                        require 'PHPMailer/src/Exception.php';
+
+                        $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+                        try {
+                            //Server settings
+                            $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+//    $mail->isSMTP();                                      // Set mailer to use SMTP
+                            $mail->Host = 'localhost';  // Specify main and backup SMTP servers
+                            $mail->SMTPAuth = false;                               // Enable SMTP authentication
+                            $mail->Username = '';                 // SMTP username
+                            $mail->Password = '';                           // SMTP password
+//    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+                            $mail->Port = 25;                                    // TCP port to connect to
+
+                            //Recipients
+                            $mail->SetFrom($_POST['email'], $_POST['inputNimi']);
+                            $mail->addAddress('toomas@starplast.ee', 'Toomas Tint');     // Add a recipient
+                            $mail->AddReplyTo($_POST['email'], $_POST['inputNimi']);
+                            $mail->CharSet = "UTF-8";
+
+                            //Content
+                            // To load the French version
+                            $mail->setLanguage('et', 'PHPMailer/language/phpmailer.lang-et.php');
+                            $mail->isHTML(true);                                  // Set email format to HTML
+                            $mail->Subject = 'Kiri VKM kodulehelt';
+                            $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+                            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                            $mail->MsgHTML($message);
+
+                            $mail->send();
+                            echo 'Viesti on lähetetty';
+                        } catch (Exception $e) {
+                            echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+                        }
+                    }
+                    ?>
+                        </strong></p>
             </div>
         </div>
     </section>

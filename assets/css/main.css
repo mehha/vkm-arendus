@@ -8684,7 +8684,9 @@ footer {
   .double-bottle p {
     max-width: 30%; }
   footer > .container {
-    min-height: 100px; } }
+    min-height: 100px; }
+  .w-sm-50 {
+    width: 50%; } }
 
 @media (min-width: 992px) {
   .oil-bottle {
@@ -8702,5 +8704,8 @@ footer {
 @media (max-width: 991px) {
   .oil-bottle-korgiga {
     background-position: center center; } }
+
+.img-language {
+  bottom: 2px; }
 
 /*# sourceMappingURL=main.css.map */

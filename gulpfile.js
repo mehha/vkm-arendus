@@ -58,7 +58,7 @@ gulp.task('watchFiles', function() {
 gulp.task('browser-sync', function() {
     browserSync.init({
         server: {
-            baseDir: "./"
+            baseDir: "./vkm-arendus/"
         }
     });
 });
@@ -68,7 +68,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('renameSources', function() {
-  return gulp.src('*.html')
+  return gulp.src('*.php')
     .pipe(htmlreplace({
         'js': 'assets/js/main.min.js',
         'css': 'assets/css/main.min.css'
@@ -84,11 +84,14 @@ gulp.task("build", ['minifyScripts', 'minifyCss'], function() {
 
 gulp.task('serve', ['watchFiles'], function(){
   browserSync.init({
-        server: "./"
+        proxy: "http://localhost/vkm-arendus",
+        path: "/vkm-arendus",
+        files: ["**/*.php"]
     });
 
     gulp.watch("assets/css/**/*.scss", ['watchFiles']);
     gulp.watch("*.html").on('change', browserSync.reload);
+    gulp.watch("*.php").on('change', browserSync.reload);
 });
 
 gulp.task("default", ["clean", 'build'], function() {
